@@ -28,6 +28,9 @@ class ClientMain extends React.Component {
   }
 
 
+  /**
+   * Render Server responses screen after connection has been established
+   */
   renderServerResponses() {
     const { connectionEstablished } = this.state;
     if (connectionEstablished) {
@@ -41,14 +44,14 @@ class ClientMain extends React.Component {
 
   connectServerResponses(serverResponsesIsDone) {
       if (serverResponsesIsDone === true) {
-
+          // TODO
       }
   }
 
 
 
   handleServerResponsesCallback(todo) {
-
+      // TODO
   }
 
 
@@ -58,7 +61,6 @@ class ClientMain extends React.Component {
    */
   connectServerCallback = dataFromChild => {
     const info = JSON.parse(dataFromChild);
-    alert("Daddy got it : " + info.ip + " , " + info.port);
     if (info.ip && info.port) {
 
       // Connect with the address & Port given from the user
@@ -69,12 +71,6 @@ class ClientMain extends React.Component {
 
       console.log(`Connected to address ${address}`);
 
-      // var response = new Object();
-      // ioClient.on("actiontype", msg => {
-      //   response.id = 
-      //   response.actionType = msg;
-      // });
-
       ioClient.on("actiondetails", msg => {
         const {serverResponsesList} = this.state;
         var parsed = JSON.parse(msg);
@@ -84,9 +80,10 @@ class ClientMain extends React.Component {
         response.vendorId = parsed.vendorId;
         response.productId = parsed.productId;
         response.deviceName = parsed.deviceName;
-        response.manufacturer = parsed.manufacturer;        
-        serverResponsesList.push(response)
-        this.setState({serverResponsesList});
+        response.manufacturer = parsed.manufacturer;
+        const newServerResponsesList = [response , ...serverResponsesList];
+        // serverResponsesList.push(response);
+        this.setState({serverResponsesList : newServerResponsesList});
       });
     }
   };

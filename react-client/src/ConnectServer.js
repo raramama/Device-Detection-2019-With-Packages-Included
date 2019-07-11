@@ -53,7 +53,6 @@ export default class ConnectServer extends React.Component {
       return;
     }
     const { ipAddress, port } = this.state;
-    alert(`Connecting to Server with IP Address: ${ipAddress} Port: ${port}`);
     const info =  {
       'ip': ipAddress , 
       'port': port
@@ -80,14 +79,14 @@ export default class ConnectServer extends React.Component {
         <input
           className={errors.ipAddress ? "error" : ""}
           type="text"
-          placeholder="Enter IP Address"
+          placeholder="Address"
           value={this.state.ipAddress}
           onChange={this.handleEmailChange}
         />
         <input
           className={errors.port ? "error" : ""}
           type="port"
-          placeholder="Enter Port"
+          placeholder="Port"
           value={this.state.port}
           onChange={this.handlePasswordChange}
         />

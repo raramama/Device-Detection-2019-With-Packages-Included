@@ -37,7 +37,7 @@
     width: 100%;
     appearance: none;
     border-radius: 5px;
-    background-color: #84c00c;
+    background-color: #C4D6E0;
     color: #fff;
     border: none;
     font-size: 16px;
@@ -46,11 +46,11 @@
   }
   
   form button:hover {
-    background-color: #669509;
+    background-color: #0B2D46;
   }
   
   form button:disabled {
-    background-color: #dbf99f;
+    background-color: 0B2D46; 
     color: #333;
   }
   
