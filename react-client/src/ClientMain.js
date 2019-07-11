@@ -1,15 +1,16 @@
 import React from "react";
+import { Button, ButtonToolbar } from "react-bootstrap";
 import "./ClientMain.css";
 import ConnectServer from "./ConnectServer";
-import ServerResponses from './ServerResponses';
+import ServerResponses from "./ServerResponses";
 
 class ClientMain extends React.Component {
   constructor(props) {
     super(props);
     this.renderConnectServer = this.renderConnectServer.bind(this);
     this.state = {
-      connectionEstablished: false , 
-      serverSentResponse: false , 
+      connectionEstablished: false,
+      serverSentResponse: false,
       serverResponsesList: []
     };
   }
@@ -27,33 +28,48 @@ class ClientMain extends React.Component {
     }
   }
 
-
   /**
    * Render Server responses screen after connection has been established
    */
   renderServerResponses() {
     const { connectionEstablished } = this.state;
     if (connectionEstablished) {
-      const {serverResponsesList} = this.state;
-      return <ServerResponses 
-                listOfResponses={serverResponsesList}
-                clientMainCallback={this.handleServerResponsesCallback}  />;
+      const { serverResponsesList } = this.state;
+      return (
+        <div>
+          <h1>Server Responses</h1>
+          <ServerResponses
+            listOfResponses={serverResponsesList}
+            clientMainCallback={this.handleServerResponsesCallback}
+          />
+        </div>
+      );
     }
   }
 
+  renderExitButton() {
+    const { connectionEstablished } = this.state;
+    if (connectionEstablished) {
+      return (
+        <div>
+          <ButtonToolbar>
+            <Button variant="secondary">Exit</Button>
+          </ButtonToolbar>
+          ;
+        </div>
+      );
+    }
+  }
 
   connectServerResponses(serverResponsesIsDone) {
-      if (serverResponsesIsDone === true) {
-          // TODO
-      }
+    if (serverResponsesIsDone === true) {
+      // TODO
+    }
   }
-
-
 
   handleServerResponsesCallback(todo) {
-      // TODO
+    // TODO
   }
-
 
   /**
    * Address = "http://localhost:8000"
@@ -62,7 +78,6 @@ class ClientMain extends React.Component {
   connectServerCallback = dataFromChild => {
     const info = JSON.parse(dataFromChild);
     if (info.ip && info.port) {
-
       // Connect with the address & Port given from the user
       this.setState({ connectionEstablished: true });
       const io = require("socket.io-client"),
@@ -72,7 +87,7 @@ class ClientMain extends React.Component {
       console.log(`Connected to address ${address}`);
 
       ioClient.on("actiondetails", msg => {
-        const {serverResponsesList} = this.state;
+        const { serverResponsesList } = this.state;
         var parsed = JSON.parse(msg);
         var response = new Object();
         response.id = serverResponsesList.length;
@@ -81,17 +96,18 @@ class ClientMain extends React.Component {
         response.productId = parsed.productId;
         response.deviceName = parsed.deviceName;
         response.manufacturer = parsed.manufacturer;
-        const newServerResponsesList = [response , ...serverResponsesList];
+        const newServerResponsesList = [response, ...serverResponsesList];
         // serverResponsesList.push(response);
-        this.setState({serverResponsesList : newServerResponsesList});
+        this.setState({ serverResponsesList: newServerResponsesList });
       });
     }
   };
 
   render() {
     return (
-      <div className={`season-display Summer`}>
+      <div className={`season-display centering Summer`}>
         {this.renderConnectServer()}
+        {/* {this.renderExitButton()} */}
         {this.renderServerResponses()}
       </div>
     );

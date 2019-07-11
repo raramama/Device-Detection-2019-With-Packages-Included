@@ -12,9 +12,12 @@
 
 .season-display{
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center;    
     height: 100vh;
+}
+
+.centering{
+    align-items: center;
 }
 
 .season-display.Winter i{
@@ -35,6 +38,6 @@
 
 .scrollingLimit{
     overflow-y: auto;
-    height: 300px;
+    height: 550px;
     width: 500px;
 }

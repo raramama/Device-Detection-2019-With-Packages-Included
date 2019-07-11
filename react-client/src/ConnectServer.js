@@ -1,4 +1,5 @@
 import React from "react";
+import { Button, ButtonToolbar } from "react-bootstrap";
 import "./styles.css";
 
   const validateURL = (str)  => {
@@ -74,7 +75,6 @@ export default class ConnectServer extends React.Component {
     const isDisabled = Object.keys(errors).some(x => errors[x]);
     return (
       <form onSubmit={this.handleSubmit}>
-
         <h1>Please enter Address & Port</h1>
         <input
           className={errors.ipAddress ? "error" : ""}
@@ -91,6 +91,9 @@ export default class ConnectServer extends React.Component {
           onChange={this.handlePasswordChange}
         />
         <button disabled={isDisabled}>Connect</button>
+        {/* <ButtonToolbar>
+            <Button disabled={isDisabled} variant="outline-primary"  onClick={this.handleSubmit}>Connect</Button>
+        </ButtonToolbar> */}
       </form>
     );
   }

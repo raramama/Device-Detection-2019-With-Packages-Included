@@ -23,7 +23,7 @@ export default class ServerResponses extends React.Component {
         <ul>
           <li>Action Type : {item.actionType}</li>
           <li>Device Name : {item.deviceName}</li>
-          <li>manufacturer : {item.manufacturer}</li>
+          <li>Manufacturer : {item.manufacturer}</li>
           <li>Product Id : {item.productId}</li>
           <li>Vendor Id : {item.vendorId}</li>
           <br />
