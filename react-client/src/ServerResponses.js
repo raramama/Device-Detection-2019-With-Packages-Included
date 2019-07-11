@@ -11,29 +11,27 @@ export default class ServerResponses extends React.Component {
   }
 
   render() {
-    const divItems = 
-             
-              this.props.listOfResponses.map((item,index) => (
-                <li key={index + item.productId}>
-                  <ul>
-                      <li>Action Type : {item.actionType}</li>
-                      <li>Device Name : {item.deviceName}</li>
-                      <li>manufacturer : {item.Manufacturer}</li>            
-                      <li>Product Id : {item.productId}</li>
-                      <li>Vendor Id : {item.vendorId}</li>
-                  </ul>
-                </li>
-              ));
-             
+    const divItems = this.props.listOfResponses.reverse().map((item, index) => (
+      <li key={index + item.productId}>
+        <ul>
+          <li>Action Type : {item.actionType}</li>
+          <li>Device Name : {item.deviceName}</li>
+          <li>manufacturer : {item.Manufacturer}</li>
+          <li>Product Id : {item.productId}</li>
+          <li>Vendor Id : {item.vendorId}</li>
+          <br/>
+        </ul>
+      </li>
+    ));
 
-    // className={classes.root}
     return (
-      <div >
-        {/* <Typography component={'span'} variant={'body2'}> */}
-          <ul>
-            {divItems}
-          </ul>
-        {/* </Typography> */}
+      <div>
+        <label>Wating for responses from the Server</label>
+        <div className='scrollingLimit'>
+          {/* <Typography component={'span'} variant={'body2'}> */}
+          <ul>{divItems}</ul>
+          {/* </Typography> */}
+        </div>
       </div>
     );
   }

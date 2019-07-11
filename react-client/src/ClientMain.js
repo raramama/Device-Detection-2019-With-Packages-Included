@@ -3,13 +3,6 @@ import "./ClientMain.css";
 import ConnectServer from "./ConnectServer";
 import ServerResponses from './ServerResponses';
 
-const getSeason = (lat, month) => {
-  if (month > 2 && month < 9) {
-    return lat > 0 ? "Summer" : "Winter";
-  }
-  return lat > 0 ? "Winter" : "Summer";
-};
-
 class ClientMain extends React.Component {
   constructor(props) {
     super(props);
@@ -99,9 +92,8 @@ class ClientMain extends React.Component {
   };
 
   render() {
-    const season = getSeason(this.props.lat, new Date().getMonth());
     return (
-      <div className={`season-display ${season}`}>
+      <div className={`season-display Summer`}>
         {this.renderConnectServer()}
         {this.renderServerResponses()}
       </div>
