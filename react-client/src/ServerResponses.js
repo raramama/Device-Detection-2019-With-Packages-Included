@@ -10,6 +10,14 @@ export default class ServerResponses extends React.Component {
     this.props.clientMainCallback(true);
   }
 
+  getNoDataMessage() {
+    if (this.props.listOfResponses && this.props.listOfResponses.length <= 0){
+      return (
+        <label>N Data ! Wating for Server ...</label>
+      );
+    }
+  }
+
   render() {
     const divItems = this.props.listOfResponses.reverse().map((item, index) => (
       <li key={index + item.productId}>
@@ -26,7 +34,7 @@ export default class ServerResponses extends React.Component {
 
     return (
       <div>
-        <label>Wating for responses from the Server</label>
+        {this.getNoDataMessage()}
         <div className='scrollingLimit'>
           {/* <Typography component={'span'} variant={'body2'}> */}
           <ul>{divItems}</ul>

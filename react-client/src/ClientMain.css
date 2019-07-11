@@ -34,6 +34,7 @@
 }
 
 .scrollingLimit{
-    overflow: scroll;
+    overflow-y: auto;
     height: 300px;
+    width: 500px;
 }
