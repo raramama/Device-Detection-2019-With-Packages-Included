@@ -22,7 +22,8 @@ const validatePort = port => {
 const validateInput = (ipAddress, port) => {
   // true means invalid, so our conditions got reversed
   return {
-    ipAddress: ipAddress.length === 0 || !validateURL(ipAddress),
+    // ipAddress: ipAddress.length === 0 || !validateURL(ipAddress),
+    ipAddress: ipAddress.length === 0,
     port: port.length === 0 || !validatePort(port)
   };
 };
@@ -39,7 +40,7 @@ export default class ConnectServer extends React.Component {
     };
   }
 
-  handleEmailChange = evt => {
+  handleAddressChange = evt => {
     this.setState({ ipAddress: evt.target.value });
   };
 
@@ -48,18 +49,22 @@ export default class ConnectServer extends React.Component {
   };
 
   handleSubmit = evt => {
-    if (!this.canBeSubmitted()) {
+    const { ipAddress, port } = this.state;
+    const isIp = require("is-ip");
+    if ((isIp(ipAddress) || validateURL(ipAddress)) && this.canBeSubmitted()) {
+      // we need one of them , either an IP address or
+      // a valid URL
+      const info = {
+        ip: ipAddress,
+        port: port
+      };
+
+      const _info = JSON.stringify(info);
+      this.props.clientMainCallback(_info);
+    } else {
       evt.preventDefault();
       return;
     }
-    const { ipAddress, port } = this.state;
-    const info = {
-      ip: ipAddress,
-      port: port
-    };
-
-    const _info = JSON.stringify(info);
-    this.props.clientMainCallback(_info);
   };
 
   canBeSubmitted() {
@@ -73,13 +78,13 @@ export default class ConnectServer extends React.Component {
     const isDisabled = Object.keys(errors).some(x => errors[x]);
     return (
       <form onSubmit={this.handleSubmit}>
-        <h1>Connect To Server</h1>        
+        <h1>Connect To Server</h1>
         <input
           className={errors.ipAddress ? "error" : ""}
           type="text"
           placeholder="Address"
           value={this.state.ipAddress}
-          onChange={this.handleEmailChange}
+          onChange={this.handleAddressChange}
         />
         <input
           className={errors.port ? "error" : ""}
