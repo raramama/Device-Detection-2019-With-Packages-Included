@@ -72,11 +72,11 @@ class ClientMain extends React.Component {
         <div>
           <ButtonToolbar>
             <Button
-              variant="secondary"
+              variant="outline-dark"
               className="exitBtn"
               onClick={this.backReconnect}
             >
-              Change IP/Port
+              Exit
             </Button>
           </ButtonToolbar>
           ;
