@@ -21,8 +21,7 @@ const validatePort = port => {
 
 const validateInput = (ipAddress, port) => {
   // true means invalid, so our conditions got reversed
-  return {
-    // ipAddress: ipAddress.length === 0 || !validateURL(ipAddress),
+  return {    
     ipAddress: ipAddress.length === 0,
     port: port.length === 0 || !validatePort(port)
   };
@@ -67,6 +66,10 @@ export default class ConnectServer extends React.Component {
     }
   };
 
+
+  /**
+   * Verify the user's input is correct , both IP & Address
+   */
   canBeSubmitted() {
     const errors = validateInput(this.state.ipAddress, this.state.port);
     const isDisabled = Object.keys(errors).some(x => errors[x]);

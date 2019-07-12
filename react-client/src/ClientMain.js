@@ -8,10 +8,12 @@ class ClientMain extends React.Component {
   constructor(props) {
     super(props);
     this.renderConnectServer = this.renderConnectServer.bind(this);
+    this.backReconnect = this.backReconnect.bind(this);
     this.state = {
       connectionEstablished: false,
       serverSentResponse: false,
-      serverResponsesList: []
+      serverResponsesList: [],
+      ioClient: null
     };
   }
 
@@ -25,6 +27,18 @@ class ClientMain extends React.Component {
     const { connectionEstablished } = this.state;
     if (!connectionEstablished) {
       return <ConnectServer clientMainCallback={this.connectServerCallback} />;
+    }
+  }
+
+  backReconnect() {
+    this.setState({ connectionEstablished: false, serverSentResponse: false });
+    const { ioClient } = this.state;
+    const { serverResponsesList } = this.state;
+    this.setState({ serverResponsesList: [] });
+    try {
+      ioClient.disconnect();
+    } catch (error) {
+      alert(error.message);
     }
   }
 
@@ -47,13 +61,23 @@ class ClientMain extends React.Component {
     }
   }
 
+  /**
+   * Render the exit button , used when we're already logged in an we want to
+   * get out to the main screen
+   */
   renderExitButton() {
     const { connectionEstablished } = this.state;
     if (connectionEstablished) {
       return (
         <div>
           <ButtonToolbar>
-            <Button variant="secondary">Exit</Button>
+            <Button
+              variant="secondary"
+              className="exitBtn"
+              onClick={this.backReconnect}
+            >
+              Change IP/Port
+            </Button>
           </ButtonToolbar>
           ;
         </div>
@@ -62,12 +86,12 @@ class ClientMain extends React.Component {
   }
 
   handleServerResponsesCallback(todo) {
-    // TODO : in the future when we'd more logic
+    // TODO : in the future when we'd need to add more logic
   }
 
   /**
-   * Address = "http://localhost:8000"
-   * Port = 8000
+   * Example Address = "http://localhost"
+   * Example Port = 8000
    */
   connectServerCallback = dataFromChild => {
     const info = JSON.parse(dataFromChild);
@@ -78,6 +102,8 @@ class ClientMain extends React.Component {
         address = `${info.ip}:${info.port}`,
         ioClient = io.connect(address);
 
+      // keep IO client in state
+      this.setState({ ioClient: ioClient });
       console.log(`Connected to address ${address}`);
 
       ioClient.on("actiondetails", msg => {
@@ -100,8 +126,8 @@ class ClientMain extends React.Component {
   render() {
     return (
       <div className={`season-display centering Summer`}>
+        {this.renderExitButton()}
         {this.renderConnectServer()}
-        {/* {this.renderExitButton()} */}
         {this.renderServerResponses()}
       </div>
     );

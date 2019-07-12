@@ -34,8 +34,8 @@ export default class ServerResponses extends React.Component {
     return (
       <div>
         {this.getNoDataMessage()}
-        <div className="scrollingLimit">        
-          <ul>{divItems}</ul>          
+        <div className="scrollingLimit">
+          <ul>{divItems}</ul>
         </div>
       </div>
     );
