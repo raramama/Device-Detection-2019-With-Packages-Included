@@ -51,7 +51,7 @@
   
   form button:disabled {
     background-color: 0B2D46; 
-    /* color: #333; */
+    color: #333;
     color: 'white';
   }
   

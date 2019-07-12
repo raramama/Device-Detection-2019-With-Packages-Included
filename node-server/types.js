@@ -1,4 +1,11 @@
-export const TCP = 'TCP';
-export const HTTP = 'HTTP';
-export const WEBSOCKETS = 'WEBSOCKETS';
-export const UDP = 'UDP';
+const TCP = "TCP";
+const HTTP = "HTTP";
+const WEBSOCKETS = "WEBSOCKETS";
+const UDP = "UDP";
+
+module.exports = {
+  TCP: TCP,
+  HTTP: HTTP,
+  WEBSOCKETS: WEBSOCKETS,
+  UDP: UDP
+};

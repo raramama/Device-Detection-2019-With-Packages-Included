@@ -61,14 +61,8 @@ class ClientMain extends React.Component {
     }
   }
 
-  connectServerResponses(serverResponsesIsDone) {
-    if (serverResponsesIsDone === true) {
-      // TODO
-    }
-  }
-
   handleServerResponsesCallback(todo) {
-    // TODO
+    // TODO : in the future when we'd more logic
   }
 
   /**

@@ -1,6 +1,6 @@
 import React from "react";
 import Spinner from "./Spinner";
-// import Typography from "@material-ui/core/Typography";
+import "./styles.css";
 
 export default class ServerResponses extends React.Component {
   constructor(props) {
@@ -34,10 +34,8 @@ export default class ServerResponses extends React.Component {
     return (
       <div>
         {this.getNoDataMessage()}
-        <div className="scrollingLimit">
-          {/* <Typography component={'span'} variant={'body2'}> */}
-          <ul>{divItems}</ul>
-          {/* </Typography> */}
+        <div className="scrollingLimit">        
+          <ul>{divItems}</ul>          
         </div>
       </div>
     );

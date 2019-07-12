@@ -1,32 +1,31 @@
 import React from "react";
-import { Button, ButtonToolbar } from "react-bootstrap";
+// import { Button, ButtonToolbar } from "react-bootstrap";
 import "./styles.css";
 
-  const validateURL = (str)  => {
-    var regex = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
-    if(!regex .test(str)) {
-      alert("Please enter valid URL.");
-      return false;
-    }     
-    return true;
+const validateURL = str => {
+  var regex = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
+  if (!regex.test(str)) {
+    alert("Please enter valid URL.");
+    return false;
   }
+  return true;
+};
 
-
-  const validatePort = (port) => {
-    if (isNaN(port)){
-      alert('Please enter a valid Port!');
-      return false;      
-    }
-    return true;
+const validatePort = port => {
+  if (isNaN(port)) {
+    alert("Please enter a valid Port!");
+    return false;
   }
+  return true;
+};
 
-  const validateInput = (ipAddress, port) => {
+const validateInput = (ipAddress, port) => {
   // true means invalid, so our conditions got reversed
   return {
     ipAddress: ipAddress.length === 0 || !validateURL(ipAddress),
-    port: port.length  === 0 || !validatePort(port)
+    port: port.length === 0 || !validatePort(port)
   };
-}
+};
 
 export default class ConnectServer extends React.Component {
   constructor(props) {
@@ -54,9 +53,9 @@ export default class ConnectServer extends React.Component {
       return;
     }
     const { ipAddress, port } = this.state;
-    const info =  {
-      'ip': ipAddress , 
-      'port': port
+    const info = {
+      ip: ipAddress,
+      port: port
     };
 
     const _info = JSON.stringify(info);
@@ -69,13 +68,12 @@ export default class ConnectServer extends React.Component {
     return !isDisabled;
   }
 
-
   render() {
     const errors = validateInput(this.state.ipAddress, this.state.port);
     const isDisabled = Object.keys(errors).some(x => errors[x]);
     return (
       <form onSubmit={this.handleSubmit}>
-        <h1>Please enter Address & Port</h1>
+        <h1>Connect To Server</h1>        
         <input
           className={errors.ipAddress ? "error" : ""}
           type="text"
@@ -97,4 +95,4 @@ export default class ConnectServer extends React.Component {
       </form>
     );
   }
-};
+}

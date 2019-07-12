@@ -1,4 +1,8 @@
+// Import connection types
+var types = require('../types.js');
+
 module.exports = class ConnectionFactory {
+  
   constructor(connectionType, connectionPort) {
     this.connectionType = connectionType;
     this.server = null;
@@ -9,14 +13,15 @@ module.exports = class ConnectionFactory {
    *  Creates a server based on a connection type & port
    */
   createConnection() {
-    // import * as types from './types'; // Import connection types
+    
 
     switch (this.connectionType) {
       // case types.WEBSOCKETS:
-      case 'WEBSOCKETS':
+      case types.WEBSOCKETS:
         const io = require('socket.io');
         this.server = io.listen(this.connectionPort);
         break;
+      
     }
   }
 };

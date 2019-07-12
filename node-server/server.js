@@ -5,7 +5,9 @@ USBDetection(updateClients).startMonitoringDevices();
 // Get a server (WEBSOCKETS) up & running
 var ConnectionFactory = require('./comm/ConnectionFactory.js');
 const port = 8000;
-var connection = new ConnectionFactory('WEBSOCKETS', port);
+var types = require('./types.js');
+
+var connection = new ConnectionFactory(types.WEBSOCKETS, port);
 
 connection.createConnection();
 
