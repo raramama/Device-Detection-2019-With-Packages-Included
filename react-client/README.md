@@ -1,4 +1,4 @@
-Welcome to the Device-Detection Applicaion.
+Welcome to the Device-Detection Application.
 
 Created by Hanoh Jan.
 
