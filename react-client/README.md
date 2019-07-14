@@ -1,3 +1,12 @@
+Welcome to the Device-Detection Applicaion.
+
+Created by Hanoh Jan.
+
+July 2019.
+
+NPM Packages are also included.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
